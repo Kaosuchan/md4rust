@@ -2,4 +2,4 @@
 /md4c-src
 /dustbin
 /src/md4c_sys/*
-.DS_Store
+*/**/.DS_Store
