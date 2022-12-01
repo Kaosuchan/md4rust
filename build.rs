@@ -2,12 +2,12 @@ use cc::Build;
 use std::path::PathBuf;
 
 fn main() {
-    let md4c_fir = PathBuf::from("./md4c");
+    let md4c_fir = PathBuf::from("md4c");
     let md4c_src: Vec<PathBuf> = ["entity", "md4c_html", "md4c"]
         .iter()
         .map(|s| s.into())
         .collect();
-    let bindings_path = PathBuf::from("./src/md4c_sys");
+    let bindings_path = PathBuf::from("src/md4c_sys");
 
     for src in &md4c_src {
         let header = md4c_fir.join(src.with_extension("h"));
