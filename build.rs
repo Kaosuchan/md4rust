@@ -1,16 +1,18 @@
 use cc::Build;
-use std::path::PathBuf;
+use std::{path::PathBuf, fs};
 
 fn main() {
-    let md4c_fir = PathBuf::from("md4c");
+    let md4c_dir = PathBuf::from("md4c");
     let md4c_src: Vec<PathBuf> = ["entity", "md4c_html", "md4c"]
         .iter()
         .map(|s| s.into())
         .collect();
     let bindings_path = PathBuf::from("src/md4c_sys");
 
+    fs::create_dir_all(&bindings_path).unwrap();
+
     for src in &md4c_src {
-        let header = md4c_fir.join(src.with_extension("h"));
+        let header = md4c_dir.join(src.with_extension("h"));
         println!(
             "cargo:rerun-if-changed={}",
             header.to_string_lossy()
@@ -32,7 +34,7 @@ fn main() {
     let mut builder = Build::new();
 
     for src in &md4c_src {
-        builder.file(md4c_fir.join(src.with_extension("c")));
+        builder.file(md4c_dir.join(src.with_extension("c")));
     }
 
     builder.compile("md4c");
