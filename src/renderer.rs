@@ -14,6 +14,7 @@ pub trait SpecifiedRenderer {
     ) -> MdResult;
 
     fn userdata(&mut self) -> &mut Self::Userdata;
+    fn unwrap(self) -> Self::Userdata;
 }
 
 pub struct Renderer<Ud: Sized, I: SpecifiedRenderer<Userdata = Ud>>(
@@ -38,6 +39,11 @@ where
     #[inline]
     pub fn userdata(&mut self) -> &mut Ud {
         self.0.userdata()
+    }
+
+    #[inline]
+    pub fn unwrap(self) -> Ud {
+        self.0.unwrap()
     }
 }
 

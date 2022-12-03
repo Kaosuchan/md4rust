@@ -86,6 +86,7 @@ where
 {
     type Userdata = T;
 
+    #[inline]
     fn render(
         &mut self,
         input: &str,
@@ -94,8 +95,14 @@ where
         self.render(input, parser_flags)
     }
 
+    #[inline]
     fn userdata(&mut self) -> &mut Self::Userdata {
         &mut self.userdata
+    }
+
+    #[inline]
+    fn unwrap(self) -> Self::Userdata {
+        self.userdata
     }
 }
 
