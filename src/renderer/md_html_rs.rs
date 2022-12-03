@@ -30,16 +30,16 @@ where
     T: Md2HtmlUserdata,
 {
     #[inline]
-    fn render_append(&mut self, text: &str) {
+    pub fn render_append(&mut self, text: &str) {
         self.userdata.render_append(text)
     }
 
     #[inline]
-    fn render_verbatim(&mut self, data: &[u8]) {
+    pub fn render_verbatim(&mut self, data: &[u8]) {
         self.userdata.render_verbatim(data)
     }
 
-    fn render_html_escaped(&mut self, data: &[u8]) {
+    pub fn render_html_escaped(&mut self, data: &[u8]) {
         let mut beg: usize = 0;
         let mut off: usize = 0;
         let size = data.len();
@@ -79,7 +79,7 @@ where
         }
     }
 
-    fn render_url_escaped(&mut self, data: &[u8]) {
+    pub fn render_url_escaped(&mut self, data: &[u8]) {
         static HEX_CHARS: &[u8; 16] = b"0123456789ABCDEF";
 
         let mut beg: usize = 0;
@@ -113,7 +113,7 @@ where
         }
     }
 
-    fn render_utf8_codepoint(
+    pub fn render_utf8_codepoint(
         &mut self,
         codepoint: u32,
         fn_append: fn(&mut Self, &[u8]),
@@ -157,7 +157,7 @@ where
         }
     }
 
-    fn render_entity(
+    pub fn render_entity(
         &mut self,
         text: &[u8],
         fn_append: fn(&mut Self, &[u8]),
@@ -202,7 +202,7 @@ where
         fn_append(self, text);
     }
 
-    fn render_attribute(
+    pub fn render_attribute(
         &mut self,
         attribute: MdAttribute,
         fn_append: fn(&mut Self, &[u8]),
